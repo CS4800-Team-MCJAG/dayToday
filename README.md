@@ -1,14 +1,15 @@
-# vue_crash_todolist
-
-## Project setup
+# dayToday project setup
+### download files before installing Vue on command line:
 ```
-npm install
+npm install -g @vue/cli
 ```
 
 ### Compiles and hot-reloads for development
 ```
+
 npm run serve
 ```
+### app should be now be running on http://localhost:8080/
 
 ### Compiles and minifies for production
 ```
