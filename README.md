@@ -3,7 +3,7 @@
 ```
 npm install -g @vue/cli
 ```
-
+#### Once installed, you should have node_modules/ folder to run Vue
 ### Compiles and hot-reloads for development
 ```
 
