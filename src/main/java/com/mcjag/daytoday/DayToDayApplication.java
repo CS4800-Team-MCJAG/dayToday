@@ -18,4 +18,9 @@ public class DayToDayApplication {
 	public String hello(@RequestParam(value = "name", defaultValue = "World") String name) {
 		return String.format("Hello %s!", name);
 	}
+
+	@GetMapping("/calendar")
+	public String calendar() {
+		return "Welcome to your Calendar!";
+	}
 }
