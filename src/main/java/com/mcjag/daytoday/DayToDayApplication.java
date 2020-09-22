@@ -23,6 +23,11 @@ public class DayToDayApplication {
 	public String calendar() {
 		return "Welcome to your Calendar!";
 	}
+
+	@GetMapping("/onThisDay")
+	public String onThisDay() {
+		return "On this day...";
+	}
 	
 	@GetMapping("/bye")
 	public String bye(@RequestParam(value = "name", defaultValue = "World") String name) {
