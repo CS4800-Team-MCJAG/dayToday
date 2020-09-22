@@ -23,4 +23,9 @@ public class DayToDayApplication {
 	public String calendar() {
 		return "Welcome to your Calendar!";
 	}
+	
+	@GetMapping("/bye")
+	public String bye(@RequestParam(value = "name", defaultValue = "World") String name) {
+		return String.format("Bye %s!", name);
+	}
 }

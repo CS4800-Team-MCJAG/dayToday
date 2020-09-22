@@ -35,3 +35,5 @@ For mac users:
 
 For windows users:
 `mvnw spring-boot:run`
+
+### app should now be running on http://localhost:8080/
