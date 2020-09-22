@@ -29,6 +29,11 @@ public class DayToDayApplication {
 		return "On this day...";
 	}
 	
+	@GetMapping("/tomorrow")
+	public String tomorrow() {
+		return "tomorrow";
+	}
+	
 	@GetMapping("/bye")
 	public String bye(@RequestParam(value = "name", defaultValue = "World") String name) {
 		return String.format("Bye %s!", name);
