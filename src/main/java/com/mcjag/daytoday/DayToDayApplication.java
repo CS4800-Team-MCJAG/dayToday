@@ -1,5 +1,9 @@
 package com.mcjag.daytoday;
 
+import javax.mail.*;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import java.util.Properties;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.slf4j.LoggerFactory;
@@ -45,5 +49,40 @@ public class DayToDayApplication {
 	@GetMapping("/bye")
 	public String bye(@RequestParam(value = "name", defaultValue = "World") String name) {
 		return String.format("Bye %s!", name);
+	}
+
+	@GetMapping("/email")
+	public String email() {
+		final String username = "day2dayapplication@gmail.com";
+		final String password = "Day2day!";
+		Properties prop = new Properties();
+		prop.put("mail.smtp.host", "smtp.gmail.com");
+        prop.put("mail.smtp.port", "587");
+        prop.put("mail.smtp.auth", "true");
+        prop.put("mail.smtp.starttls.enable", "true"); //TLS
+
+        Session session = Session.getInstance(prop,
+                new javax.mail.Authenticator() {
+                    protected PasswordAuthentication getPasswordAuthentication() {
+                        return new PasswordAuthentication(username, password);
+                    }
+                });
+        try {
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress("from@gmail.com"));
+            message.setRecipients(
+                    Message.RecipientType.TO,
+                    InternetAddress.parse("jongbaejeon@cpp.edu")
+            );
+            message.setSubject("Testing Gmail TLS");
+            message.setText("Dear Mail Crawler,"
+                    + "\n\n Please do not spam my email!");
+            Transport.send(message);
+
+            System.out.println("Done");
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
+		return "done";
 	}
 }
