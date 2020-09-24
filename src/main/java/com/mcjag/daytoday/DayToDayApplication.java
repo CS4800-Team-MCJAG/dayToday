@@ -6,6 +6,8 @@ import javax.mail.internet.MimeMessage;
 import java.util.Properties;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.joda.time.LocalDate;
+import org.joda.time.LocalDateTime;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -43,7 +45,9 @@ public class DayToDayApplication {
 	
 	@GetMapping("/tomorrow")
 	public String tomorrow() {
-		return "tomorrow";
+		LocalDate today = new LocalDate();
+		LocalDate tomorrow = today.plusDays(1);
+		return("Tomorrow is" + tomorrow.toString("MM/dd/yyyy"));
 	}
 	
 	@GetMapping("/bye")
