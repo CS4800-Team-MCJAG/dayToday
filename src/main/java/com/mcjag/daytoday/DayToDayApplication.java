@@ -15,6 +15,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+// for_A4
+import org.apache.commons.io.IOUtils;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
+
 import java.io.IOException;
 import java.util.logging.Logger;
 
@@ -53,6 +59,18 @@ public class DayToDayApplication {
 	@GetMapping("/bye")
 	public String bye(@RequestParam(value = "name", defaultValue = "World") String name) {
 		return String.format("Bye %s!", name);
+	}
+	
+	@GetMapping("/for_A4")
+	public String for_A4() throws MalformedURLException, IOException
+	{
+		 InputStream in = new URL( "https://commons.apache.org" ).openStream();
+		 try {
+		   System.out.println( IOUtils.toString( in ) );
+		 } finally {
+		   IOUtils.closeQuietly(in);
+		 }
+		return "";
 	}
 
 	@GetMapping("/email")
