@@ -3,26 +3,35 @@ package com.mcjag.daytoday;
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import java.io.ByteArrayOutputStream;
 import java.util.Properties;
+
+import com.mcjag.daytoday.chart.Chart;
+import org.jfree.chart.ChartUtils;
+import org.jfree.chart.JFreeChart;
+import org.jfree.data.xy.XYSeries;
+import org.jfree.data.xy.XYSeriesCollection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.joda.time.LocalDate;
-import org.joda.time.LocalDateTime;
-import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 // for_A4
 import org.apache.commons.io.IOUtils;
+import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
+
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 
 import java.io.IOException;
-import java.util.logging.Logger;
+
 
 @SpringBootApplication
 @RestController
@@ -45,7 +54,7 @@ public class DayToDayApplication {
 	@GetMapping("/onThisDay")
 	public String onThisDay() throws IOException {
 		Document doc = Jsoup.connect("https://www.history.com/this-day-in-history").get();
-		String keywords = doc.select("meta[itemprop=description]").first().attr("content");
+		String keywords = doc.select("meta[itemprop=name]").get(1).attr("content");
 		return String.format("On this day: %s", keywords);
 	}
 	
@@ -53,7 +62,7 @@ public class DayToDayApplication {
 	public String tomorrow() {
 		LocalDate today = new LocalDate();
 		LocalDate tomorrow = today.plusDays(1);
-		return("Tomorrow is" + tomorrow.toString("MM/dd/yyyy"));
+		return("Tomorrow is " + tomorrow.toString("MM/dd/yyyy"));
 	}
 	
 	@GetMapping("/bye")
@@ -106,5 +115,35 @@ public class DayToDayApplication {
             e.printStackTrace();
         }
 		return "done";
+	}
+
+	@GetMapping(value = "/graph", produces = "image/png")
+	public ResponseEntity<StreamingResponseBody> getGraph() throws Exception {
+		var dataset = new XYSeriesCollection();
+		var series = new XYSeries("Events this Week");
+		series.add(1, 3);
+		series.add(2, 1);
+		series.add(3, 7);
+		series.add(4, 11);
+		series.add(5, 4);
+		series.add(6, 3);
+		series.add(7, 0);
+
+		dataset.addSeries(series);
+
+		JFreeChart chart = Chart.createXYLineChart(
+				String.format("Events for the week of: %s", new LocalDate()),
+				"Sunday-Saturday",
+				"Number of Events",
+				dataset
+		);
+
+		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+		ChartUtils.writeChartAsPNG(outputStream, chart, 700, 467);
+		StreamingResponseBody streamingResponseBody = out -> {
+			out.write(outputStream.toByteArray());
+		};
+
+		return new ResponseEntity<>(streamingResponseBody, HttpStatus.OK);
 	}
 }
