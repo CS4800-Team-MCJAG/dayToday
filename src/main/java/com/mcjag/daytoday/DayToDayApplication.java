@@ -105,9 +105,9 @@ public class DayToDayApplication {
                     Message.RecipientType.TO,
                     InternetAddress.parse("jongbaejeon@cpp.edu")
             );
-            message.setSubject("Testing Gmail TLS");
-            message.setText("Dear Mail Crawler,"
-                    + "\n\n Please do not spam my email!");
+            message.setSubject("You Have an Alert!");
+            message.setText("Dear Recepient,"
+                    + "\n\n You have a zoom meeting: ");
             Transport.send(message);
 
             System.out.println("Done");
