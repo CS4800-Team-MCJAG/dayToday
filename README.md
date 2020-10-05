@@ -37,3 +37,10 @@ For windows users:
 `mvnw spring-boot:run`
 
 ### app should now be running on http://localhost:8080/
+
+## To set up the database:
+- In the root folder: `mysql -uroot -p < src/main/java/com/mcjag/daytoday/databaseScript.sql`
+
+#####Check the database has been created by 
+- `mysql -uroot -p`
+- `show databases;` 

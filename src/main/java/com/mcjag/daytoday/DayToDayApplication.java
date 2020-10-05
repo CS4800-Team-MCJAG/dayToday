@@ -32,7 +32,6 @@ import java.net.URL;
 
 import java.io.IOException;
 
-
 @SpringBootApplication
 @RestController
 public class DayToDayApplication {
