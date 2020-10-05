@@ -9,8 +9,6 @@ CREATE TABLE users(
     email varchar(50) NOT NULL UNIQUE,
     firstName varchar(50) NOT NULL,
     lastName varchar(50) NOT NULL,
-    token varChar(32),
-    tokenExp DateTime,
     PRIMARY KEY(email)
 );
 
