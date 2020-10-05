@@ -17,7 +17,7 @@ CREATE TABLE events(
     eventName varchar(100),
     startDayAndTime DateTime,
     endDayAndTime DateTime,
-    alert time,
+    alert DateTime,
     email varchar(50) NOT NULL,
     PRIMARY KEY(eventID),
     FOREIGN KEY (email) REFERENCES users(email)
