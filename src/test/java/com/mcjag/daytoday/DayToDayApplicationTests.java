@@ -38,5 +38,11 @@ class DayToDayApplicationTests {
 	void testTomorrow(){
 		assertThat(this.controller.tomorrow()).contains("Tomorrow");
 	}
+	
+	@Test
+	void testByeFunc()
+	{
+		Assert.assertEquals("Bye World!", controller.bye("World"));
+	}
 
 }
