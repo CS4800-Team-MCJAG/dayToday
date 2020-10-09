@@ -45,4 +45,8 @@ class DayToDayApplicationTests {
 		Assert.assertEquals("Bye World!", controller.bye("World"));
 	}
 
+	@Test
+	void testEmail(){
+		assertThat(this.controller.email()).contains("done");
+	}
 }
