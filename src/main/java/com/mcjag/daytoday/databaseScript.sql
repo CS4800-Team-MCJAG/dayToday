@@ -19,6 +19,7 @@ CREATE TABLE events(
     endDayAndTime DateTime,
     alert DateTime,
     email varchar(50) NOT NULL,
+    zoomLink varChar(200),
     PRIMARY KEY(eventID),
     FOREIGN KEY (email) REFERENCES users(email)
     ON DELETE CASCADE ON UPDATE CASCADE
