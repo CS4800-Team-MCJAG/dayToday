@@ -9,21 +9,17 @@ A Calendar and Planner web service
 npm install -g @vue/cli
 ```
 #### Once installed, you should have node_modules/ folder to run Vue
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-### app should be now be running on http://localhost:8080/
-
 ### Compiles and minifies for production
 ```
 npm run build
 ```
 
-### Lints and fixes files
+### Run code on localhost
+
+npm run serve
 ```
-npm run lint
-```
+### app should be now be running on http://localhost:8080/
+
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
