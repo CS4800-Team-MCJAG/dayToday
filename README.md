@@ -15,9 +15,11 @@ npm run build
 ```
 
 ### Run code on localhost
+```
 
 npm run serve
 ```
+
 ### app should be now be running on http://localhost:8080/
 
 
