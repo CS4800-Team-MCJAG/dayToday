@@ -40,6 +40,7 @@ For windows users:
 - In the root folder: `mysql -uroot -p < src/main/java/com/mcjag/daytoday/databaseScript.sql`
 
 #####Check the database has been created by 
+
 - `mysql -uroot -p`
 - `show databases;` 
 
