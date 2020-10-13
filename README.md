@@ -44,3 +44,7 @@ For windows users:
 #####Check the database has been created by 
 - `mysql -uroot -p`
 - `show databases;` 
+
+##To add entries into the database:
+
+- you will have to change the password in the `src/main/resources/META-INF/persistence.xml` file

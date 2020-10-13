@@ -1,25 +1,26 @@
 package com.mcjag.daytoday.tables;
 
-import org.joda.time.DateTime;
-
 import javax.persistence.*;
-import java.net.URL;
+import java.net.MalformedURLException;
+import java.util.Date;
 
 @Entity
 @Table(name="events")
 public class Event {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
     private int eventID;
     private String eventName;
-    private DateTime startDayAndTime;
-    private DateTime endDayAndTime;
-    private DateTime alert;
+    private Date startDayAndTime;
+    private Date endDayAndTime;
+    private Date alert;
     private String email;
-    private URL zoomLink;
+    private String zoomLink;
 
-    public Event(int eventID, String eventName, DateTime start, DateTime end, DateTime alert, String email, URL zoomLink) {
-        this.eventID = eventID;
+    public Event() {
+    }
+
+    public Event(String eventName, Date start, Date end, Date alert, String email, String zoomLink) throws MalformedURLException {
         this.eventName = eventName;
         this.startDayAndTime = start;
         this.endDayAndTime = end;
@@ -44,27 +45,27 @@ public class Event {
         this.eventName = eventName;
     }
 
-    public DateTime getStartDayAndTime() {
+    public Date getStartDayAndTime() {
         return startDayAndTime;
     }
 
-    public void setStartDayAndTime(DateTime startDayAndTime) {
+    public void setStartDayAndTime(Date startDayAndTime) {
         this.startDayAndTime = startDayAndTime;
     }
 
-    public DateTime getEndDayAndTime() {
+    public Date getEndDayAndTime() {
         return endDayAndTime;
     }
 
-    public void setEndDayAndTime(DateTime endDayAndTime) {
+    public void setEndDayAndTime(Date endDayAndTime) {
         this.endDayAndTime = endDayAndTime;
     }
 
-    public DateTime getAlert() {
+    public Date getAlert() {
         return alert;
     }
 
-    public void setAlert(DateTime alert) {
+    public void setAlert(Date alert) {
         this.alert = alert;
     }
 
@@ -76,11 +77,11 @@ public class Event {
         this.email = email;
     }
 
-    public URL getZoomLink() {
+    public String getZoomLink() {
         return zoomLink;
     }
 
-    public void setZoomLink(URL zoomLink) {
+    public void setZoomLink(String zoomLink) {
         this.zoomLink = zoomLink;
     }
 }

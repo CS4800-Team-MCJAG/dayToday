@@ -1,7 +1,5 @@
 package com.mcjag.daytoday.tables;
 
-import org.springframework.lang.NonNull;
-
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -10,10 +8,13 @@ import javax.persistence.Table;
 @Table(name="users")
 public class User {
     @Id
-    @NonNull
     private String email;
     private String firstName;
     private String lastName;
+
+    public User() {
+
+    }
 
     public User(String email, String firstName, String lastName) {
         this.email = email;

@@ -3,10 +3,13 @@ package com.mcjag.daytoday;
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.persistence.*;
 import java.io.ByteArrayOutputStream;
 import java.util.Properties;
 
 import com.mcjag.daytoday.chart.Chart;
+import com.mcjag.daytoday.tables.Event;
+import com.mcjag.daytoday.tables.User;
 import org.jfree.chart.ChartUtils;
 import org.jfree.chart.JFreeChart;
 import org.jfree.data.xy.XYSeries;
@@ -19,6 +22,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -79,6 +83,58 @@ public class DayToDayApplication {
 		   IOUtils.closeQuietly(in);
 		 }
 		return "";
+	}
+
+	@PostMapping("/dayToday/user")
+	public String addUser(User u) {
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("dayToday");
+		EntityManager em = null;
+		EntityTransaction tx = null;
+		try {
+			em = emf.createEntityManager();
+			tx = em.getTransaction();
+			tx.begin();
+			em.persist(u);
+			tx.commit();
+		} catch (RuntimeException ex) {
+			try {
+				tx.rollback();
+			} catch (RuntimeException rollbackEx) {
+				System.out.println("Could not roll back transaction");
+			}
+			throw ex;
+		} finally {
+			if (em != null) {
+				em.close();
+			}
+		}
+		return "user created";
+	}
+
+	@PostMapping("/dayToday/event")
+	public String addEvent(Event e) {
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("dayToday");
+		EntityManager em = null;
+		EntityTransaction tx = null;
+		try {
+			em = emf.createEntityManager();
+			tx = em.getTransaction();
+			tx.begin();
+			em.persist(e);
+			tx.commit();
+		} catch (RuntimeException ex) {
+			try {
+				tx.rollback();
+			} catch (RuntimeException rollbackEx) {
+				System.out.println("Could not roll back transaction");
+			}
+			throw ex;
+		} finally {
+			if (em != null) {
+				em.close();
+			}
+		}
+		return "event created";
 	}
 
 	@GetMapping("/email")
