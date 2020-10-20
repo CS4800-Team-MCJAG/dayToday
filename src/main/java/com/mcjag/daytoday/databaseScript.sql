@@ -9,6 +9,7 @@ CREATE TABLE users(
     email varchar(50) UNIQUE,
     firstName varchar(50),
     lastName varchar(50),
+    password varchar(30),
     PRIMARY KEY(email)
 );
 

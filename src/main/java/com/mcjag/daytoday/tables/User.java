@@ -11,15 +11,17 @@ public class User {
     private String email;
     private String firstName;
     private String lastName;
+    private String password;
 
     public User() {
 
     }
 
-    public User(String email, String firstName, String lastName) {
+    public User(String email, String firstName, String lastName, String password) {
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.password = password;
     }
 
     public String getEmail() {
@@ -44,5 +46,13 @@ public class User {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
