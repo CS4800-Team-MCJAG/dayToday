@@ -158,7 +158,7 @@ public class DayToDayApplication {
             message.setFrom(new InternetAddress("from@gmail.com"));
             message.setRecipients(
                     Message.RecipientType.TO,
-                    InternetAddress.parse("jongbaejeon@cpp.edu")
+                    InternetAddress.parse("recipient@email")
             );
             message.setSubject("You Have an Alert!");
             message.setText("Dear Recepient,"
