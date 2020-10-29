@@ -5,6 +5,8 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.persistence.*;
 import java.io.ByteArrayOutputStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 import com.mcjag.daytoday.chart.Chart;
@@ -21,10 +23,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 // for_A4
 import org.apache.commons.io.IOUtils;
@@ -85,7 +84,7 @@ public class DayToDayApplication {
 		return "";
 	}
 
-	@PostMapping("/dayToday/user")
+	@PostMapping("/user")
 	public String addUser(User u) {
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("dayToday");
 		EntityManager em = null;
@@ -111,7 +110,76 @@ public class DayToDayApplication {
 		return "user created";
 	}
 
-	@PostMapping("/dayToday/event")
+	@GetMapping("/users")
+	public List<User> displayAllUsers() {
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("dayToday");
+		EntityManager em = null;
+		List<User> list = new ArrayList<>();
+		try {
+			em = emf.createEntityManager();
+			list = em.createQuery("select u from User u").getResultList();
+		} finally {
+			if (em != null) {
+				em.close();
+			}
+		}
+		return list;
+	}
+
+	@DeleteMapping("/user/{email}")
+	public String deleteUser(@PathVariable("email") String email) {
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("dayToday");
+		EntityManager em = null;
+		EntityTransaction tx = null;
+		try {
+			em = emf.createEntityManager();
+			tx = em.getTransaction();
+			tx.begin();
+			User u = em.find(User.class, email);
+			em.remove(u);
+			tx.commit();
+		} catch (RuntimeException ex) {
+			try {
+				tx.rollback();
+			} catch (RuntimeException rollbackEx) {
+				System.out.println("Could not roll back transaction");
+			}
+			throw ex;
+		} finally {
+			if (em != null) {
+				em.close();
+			}
+		}
+		return "user deleted";
+	}
+
+	@PutMapping("/user")
+	public String updateUser(User u) {
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("dayToday");
+		EntityManager em = null;
+		EntityTransaction tx = null;
+		try {
+			em = emf.createEntityManager();
+			tx = em.getTransaction();
+			tx.begin();
+			em.merge(u);
+			tx.commit();
+		} catch (RuntimeException ex) {
+			try {
+				tx.rollback();
+			} catch (RuntimeException rollbackEx) {
+				System.out.println("Could not roll back transaction");
+			}
+			throw ex;
+		} finally {
+			if (em != null) {
+				em.close();
+			}
+		}
+		return "user updated";
+	}
+
+	@PostMapping("/event")
 	public String addEvent(Event e) {
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("dayToday");
 		EntityManager em = null;
@@ -135,6 +203,75 @@ public class DayToDayApplication {
 			}
 		}
 		return "event created";
+	}
+
+	@GetMapping("/events")
+	public List<Event> displayAllEvents() {
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("dayToday");
+		EntityManager em = null;
+		List<Event> list = new ArrayList<>();
+		try {
+			em = emf.createEntityManager();
+			list = em.createQuery("select e from Event e").getResultList();
+		} finally {
+			if (em != null) {
+				em.close();
+			}
+		}
+		return list;
+	}
+
+	@DeleteMapping("/event/{eventID}")
+	public String deleteEvent(@PathVariable("eventID") int eventID) {
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("dayToday");
+		EntityManager em = null;
+		EntityTransaction tx = null;
+		try {
+			em = emf.createEntityManager();
+			tx = em.getTransaction();
+			tx.begin();
+			Event u = em.find(Event.class, eventID);
+			em.remove(u);
+			tx.commit();
+		} catch (RuntimeException ex) {
+			try {
+				tx.rollback();
+			} catch (RuntimeException rollbackEx) {
+				System.out.println("Could not roll back transaction");
+			}
+			throw ex;
+		} finally {
+			if (em != null) {
+				em.close();
+			}
+		}
+		return "event deleted";
+	}
+
+	@PutMapping("/event")
+	public String updateEvent(Event e) {
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("dayToday");
+		EntityManager em = null;
+		EntityTransaction tx = null;
+		try {
+			em = emf.createEntityManager();
+			tx = em.getTransaction();
+			tx.begin();
+			em.merge(e);
+			tx.commit();
+		} catch (RuntimeException ex) {
+			try {
+				tx.rollback();
+			} catch (RuntimeException rollbackEx) {
+				System.out.println("Could not roll back transaction");
+			}
+			throw ex;
+		} finally {
+			if (em != null) {
+				em.close();
+			}
+		}
+		return "event updated";
 	}
 
 	@GetMapping("/email")
