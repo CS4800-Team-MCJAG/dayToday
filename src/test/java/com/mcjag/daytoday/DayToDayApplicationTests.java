@@ -1,5 +1,7 @@
 package com.mcjag.daytoday;
 
+import com.mcjag.daytoday.providers.EventProvider;
+import com.mcjag.daytoday.providers.WelcomeProvider;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +19,7 @@ import java.io.IOException;
 class DayToDayApplicationTests {
 
 	@Autowired
-	private DayToDayApplication controller;
+	private WelcomeProvider welcomeProvider;
 
 	@Test
 	void contextLoads() {
@@ -25,28 +27,13 @@ class DayToDayApplicationTests {
 
 	@Test
 	void test2() {
-		Assert.assertEquals("Hello World!", this.controller.hello("World"));
+		Assert.assertEquals("Hello World!", this.welcomeProvider.hello("World"));
 	}
 
 	@Test
 	void test() throws IOException {
-		Boolean res = this.controller.onThisDay().contains("On this day: ");
+		Boolean res = this.welcomeProvider.onThisDay().contains("On this day: ");
 		Assert.assertTrue(res);
 	}
 
-	@Test
-	void testTomorrow(){
-		assertThat(this.controller.tomorrow()).contains("Tomorrow");
-	}
-	
-	@Test
-	void testByeFunc()
-	{
-		Assert.assertEquals("Bye World!", controller.bye("World"));
-	}
-
-	@Test
-	void testEmail(){
-		assertThat(this.controller.email()).contains("done");
-	}
 }
