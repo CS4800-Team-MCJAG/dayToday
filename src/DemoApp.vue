@@ -4,6 +4,10 @@ import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
 import { INITIAL_EVENTS, createEventId } from './event-utils'
+import UserDataService from "./service/UserDataService";
+import EventDataService from "./service/EventDataService";
+
+
 
 export default {
 
@@ -57,7 +61,7 @@ export default {
       calendarApi.unselect() // clear date selection
 
       if (title) {
-        calendarApi.addEvent({
+          EventDataService.addEvent({
           id: createEventId(),
           title,
           start: selectInfo.startStr,
