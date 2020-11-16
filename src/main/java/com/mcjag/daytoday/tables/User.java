@@ -1,20 +1,33 @@
 package com.mcjag.daytoday.tables;
-
+import org.hibernate.annotations.*;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name="users")
 public class User {
     @Id
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")    
+    @Column(name="email")
     private String email;
+
+    @Column(name="firstName")
     private String firstName;
+
+    @Column(name="lastName")
     private String lastName;
+
+    @Column(name="password")
     private String password;
 
     public User() {
-
+        email=" ";
+        firstName=" ";
+        lastName= " ";
+        password = " ";
     }
 
     public User(String email, String firstName, String lastName, String password) {
@@ -54,5 +67,10 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    @Override
+    public String toString(){
+        return "User [email=" + email + ", name= " + firstName + " " + lastName + "]";
     }
 }

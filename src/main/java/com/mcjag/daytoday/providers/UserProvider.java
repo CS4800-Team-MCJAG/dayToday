@@ -76,6 +76,35 @@ public class UserProvider {
         return "user deleted";
     }
 
+    public User findUserByEmail(String email){
+        EntityManager em = null;
+        EntityTransaction tx = null;
+        User user = new User();
+        try {
+            em = emf.createEntityManager();
+            tx = em.getTransaction();
+            tx.begin();
+            user = em.find(User.class, email);
+            if(user.getEmail()==null){
+                user.setEmail("michellee.lamm@gmail.com");
+            }
+            em.merge(user);
+            tx.commit();
+        } catch (RuntimeException ex) {
+            try {
+                tx.rollback();
+            } catch (RuntimeException rollbackEx) {
+                System.out.println("Could not roll back transaction");
+            }
+            throw ex;
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }     
+        return user;
+    }
+
     public String updateUser(User u) {
         EntityManager em = null;
         EntityTransaction tx = null;

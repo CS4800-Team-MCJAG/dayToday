@@ -84,4 +84,9 @@ public class Event {
     public void setZoomLink(String zoomLink) {
         this.zoomLink = zoomLink;
     }
+
+    @Override
+    public String toString(){
+        return "Event [id=" + eventID + ", name= " + eventName + "]";
+    }
 }

@@ -9,9 +9,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
-
-import jdk.jfr.Timestamp;
-
 import java.io.IOException;
 
 
@@ -20,7 +17,7 @@ class DayToDayApplicationTests {
 
 	@Autowired
 	private WelcomeProvider welcomeProvider;
-
+/*
 	@Test
 	void contextLoads() {
 	}
@@ -35,5 +32,5 @@ class DayToDayApplicationTests {
 		Boolean res = this.welcomeProvider.onThisDay().contains("On this day: ");
 		Assert.assertTrue(res);
 	}
-
+*/
 }
