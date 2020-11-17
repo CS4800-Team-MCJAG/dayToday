@@ -25,7 +25,7 @@ import com.mcjag.daytoday.payload.request.LoginRequest;
 import com.mcjag.daytoday.payload.request.SignupRequest;
 import com.mcjag.daytoday.payload.response.JwtResponse;
 import com.mcjag.daytoday.payload.response.MessageResponse;
-import com.mcjag.daytoday.providers.UserProvider;
+import com.mcjag.daytoday.repository.UserRepository;
 import com.mcjag.daytoday.security.jwt.JwtUtils;
 import com.mcjag.daytoday.security.services.UserDetailsImpl;
 
@@ -38,7 +38,7 @@ public class AuthController {
 	AuthenticationManager authenticationManager;
 
 	@Autowired
-	UserProvider userProvider;
+	UserRepository userRepository;
 
 	@Autowired
 	PasswordEncoder encoder;
@@ -66,13 +66,13 @@ public class AuthController {
 
 	@PostMapping("/register")
 	public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
-/*
-		if (userProvider.findUserByEmail(signUpRequest.getEmail())== null) {
+
+		if (userRepository.existsByEmail(signUpRequest.getEmail())) {
 			return ResponseEntity
 					.badRequest()
 					.body(new MessageResponse("Error: Email is already in use!"));
 		}
-*/
+
 		// Create new user's account
         User user = new User(signUpRequest.getEmail(),
                              signUpRequest.getFirstName(),
@@ -80,7 +80,7 @@ public class AuthController {
 							 encoder.encode(signUpRequest.getPassword()));
 
 
-		userProvider.addUser(user);
+		userRepository.save(user);
 
 		return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
 	}

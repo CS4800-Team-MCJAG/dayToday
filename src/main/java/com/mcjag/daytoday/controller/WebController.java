@@ -1,7 +1,6 @@
 package com.mcjag.daytoday.controller;
 
 import com.mcjag.daytoday.providers.EventProvider;
-import com.mcjag.daytoday.providers.UserProvider;
 import com.mcjag.daytoday.providers.WelcomeProvider;
 import com.mcjag.daytoday.tables.Event;
 import com.mcjag.daytoday.tables.User;
@@ -17,8 +16,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api")
 public class WebController {
-    @Autowired
-    private UserProvider userProvider;
+
     @Autowired
     private EventProvider eventProvider;
     @Autowired
@@ -73,7 +71,7 @@ public class WebController {
     public String createUser(User u) {
         return userProvider.addUser(u);
     }
-    */
+    
 
     @GetMapping("/users")
     public List<User> showAllUsers() {
@@ -89,4 +87,5 @@ public class WebController {
     public String updateUser(User u) {
         return userProvider.updateUser(u);
     }
+    */
 }

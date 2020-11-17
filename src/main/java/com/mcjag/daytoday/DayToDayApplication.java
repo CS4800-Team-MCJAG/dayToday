@@ -1,7 +1,7 @@
 package com.mcjag.daytoday;
 
 import com.mcjag.daytoday.providers.EventProvider;
-import com.mcjag.daytoday.providers.UserProvider;
+//import com.mcjag.daytoday.providers.UserProvider;
 import com.mcjag.daytoday.providers.WelcomeProvider;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -14,19 +14,18 @@ import java.io.IOException;
 @SpringBootApplication
 @RestController
 public class DayToDayApplication {
-
 	@Bean
 	public EventProvider eventProvider() {
 		EventProvider eventProvider = new EventProvider();
 		return eventProvider;
 	}
-
+/*
 	@Bean
 	public UserProvider userProvider() {
 		UserProvider userProvider = new UserProvider();
 		return userProvider;
 	}
-
+*/
 	@Bean
 	public WelcomeProvider welcomeProvider() {
 		WelcomeProvider welcomeProvider = new WelcomeProvider();

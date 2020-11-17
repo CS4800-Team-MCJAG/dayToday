@@ -77,28 +77,28 @@
     },
     methods: {
         handleLogin() {
-        this.loading = true;
-        this.$validator.validateAll().then(isValid => {
-            if (!isValid) {
-            this.loading = false;
-            return;
-            }
-
-            if (this.user.email && this.user.password) {
-            this.$store.dispatch('auth/login', this.user).then(
-                () => {
-                this.$router.push('/profile');
-                },
-                error => {
-                this.loading = false;
-                this.message =
-                    (error.response && error.response.data) ||
-                    error.message ||
-                    error.toString();
+            this.loading = true;
+            this.$validator.validateAll().then(isValid => {
+                if (!isValid) {
+                    this.loading = false;
+                    return;
                 }
-            );
-            }
-        });
+
+                if (this.user.email && this.user.password) {
+                    this.$store.dispatch('auth/login', this.user).then(
+                        () => {
+                        this.$router.push('/profile');
+                        },
+                        error => {
+                            this.loading = false;
+                            this.message =
+                                (error.response && error.response.data) ||
+                                error.message ||
+                                error.toString();
+                        }
+                    );
+                }
+            });
         }
     }
     };

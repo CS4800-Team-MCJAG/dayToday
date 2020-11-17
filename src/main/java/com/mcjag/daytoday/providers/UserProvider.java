@@ -1,5 +1,5 @@
 package com.mcjag.daytoday.providers;
-
+/*
 import com.mcjag.daytoday.tables.User;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,18 +9,28 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public class UserProvider {
+@Repository
+public class UserProvider extends JpaRepository<User, String> {
+
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("dayToday");
 
     public String addUser(User u) {
         EntityManager em = null;
         EntityTransaction tx = null;
         try {
+
             em = emf.createEntityManager();
             tx = em.getTransaction();
             tx.begin();
-            em.persist(u);
+            User temp = em.find(User.class, u.getEmail());
+            if(temp==null){
+                em.persist(u);
+            }
+                em.merge(u);
+            
             tx.commit();
         } catch (RuntimeException ex) {
             try {
@@ -129,3 +139,4 @@ public class UserProvider {
         return "user updated";
     }
 }
+*/

@@ -9,8 +9,6 @@ import javax.persistence.*;
 @Table(name="users")
 public class User {
     @Id
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid2")    
     @Column(name="email")
     private String email;
 
@@ -24,10 +22,7 @@ public class User {
     private String password;
 
     public User() {
-        email=" ";
-        firstName=" ";
-        lastName= " ";
-        password = " ";
+        
     }
 
     public User(String email, String firstName, String lastName, String password) {
