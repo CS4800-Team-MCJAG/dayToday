@@ -74,7 +74,7 @@
         v-if="message"
         class="alert"
         :class="successful ? 'alert-success' : 'alert-danger'"
-      >{{message}}</div>
+      >{{ message }}</div>
     </div>
   </div>
 </template>
@@ -115,9 +115,8 @@ export default {
             },
             error => {
               this.message =
-                (error.response && error.response.data) ||
-                error.message ||
-                error.toString();
+               (error.response && error.response.data.message)
+               ;
               this.successful = false;
             }
           );
