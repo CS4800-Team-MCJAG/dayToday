@@ -1,7 +1,6 @@
 package com.mcjag.daytoday.providers;
 
 import com.mcjag.daytoday.tables.User;
-import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;

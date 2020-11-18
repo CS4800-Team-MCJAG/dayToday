@@ -3,6 +3,7 @@ package com.mcjag.daytoday.tables;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.util.Date;
 
 @Entity
 @Table(name="users")
@@ -12,9 +13,9 @@ public class User {
     private String firstName;
     private String lastName;
     private String password;
+    private Date loginExp;
 
     public User() {
-
     }
 
     public User(String email, String firstName, String lastName, String password) {
@@ -55,4 +56,13 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public Date getLoginExp() {
+        return loginExp;
+    }
+
+    public void setLoginExp(Date loginExp) {
+        this.loginExp = loginExp;
+    }
+
 }

@@ -2,6 +2,7 @@ package com.mcjag.daytoday.providers;
 
 import com.mcjag.daytoday.chart.Chart;
 import com.mcjag.daytoday.tables.Event;
+import com.mcjag.daytoday.tables.User;
 import org.jfree.chart.ChartUtils;
 import org.jfree.chart.JFreeChart;
 import org.jfree.data.xy.XYSeries;
@@ -10,7 +11,6 @@ import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
 
 import javax.mail.*;
@@ -75,8 +75,8 @@ public class EventProvider {
             em = emf.createEntityManager();
             tx = em.getTransaction();
             tx.begin();
-            Event u = em.find(Event.class, eventID);
-            em.remove(u);
+            Event e = em.find(Event.class, eventID);
+            em.remove(e);
             tx.commit();
         } catch (RuntimeException ex) {
             try {
@@ -214,9 +214,10 @@ public class EventProvider {
                     Message.RecipientType.TO,
                     InternetAddress.parse(e.getEmail())
             );
+            List<User> list = em.createQuery("select u from User u where u.email = :em").setParameter("em", e.getEmail()).getResultList();
+            User u = list.get(0);
             message.setSubject("You Have an Alert!");
-            message.setText("Dear Recepient,"
-                    + "\n\n You have a zoom meeting: ");
+            message.setText(String.format("Dear %s, \n\n Your event, %s, is beginning soon. \n\n %s", u.getFirstName(), e.getEventName(), e.getZoomLink()));
             Transport.send(message);
 
             System.out.println("Done");

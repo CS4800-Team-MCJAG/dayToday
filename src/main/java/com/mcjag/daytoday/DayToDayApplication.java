@@ -3,16 +3,15 @@ package com.mcjag.daytoday;
 import com.mcjag.daytoday.providers.EventProvider;
 import com.mcjag.daytoday.providers.UserProvider;
 import com.mcjag.daytoday.providers.WelcomeProvider;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.bind.annotation.*;
-import java.io.IOException;
 
 @SpringBootApplication
 @RestController
+@EnableScheduling
 public class DayToDayApplication {
 
 	@Bean
@@ -36,9 +35,4 @@ public class DayToDayApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(DayToDayApplication.class, args);
 	}
-
-
-
-
-
 }
