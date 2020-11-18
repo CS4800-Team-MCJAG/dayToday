@@ -1,7 +1,6 @@
 package com.mcjag.daytoday.controller;
 
 import com.mcjag.daytoday.providers.EventProvider;
-import com.mcjag.daytoday.providers.UserProvider;
 import com.mcjag.daytoday.providers.WelcomeProvider;
 import com.mcjag.daytoday.tables.Event;
 import com.mcjag.daytoday.tables.User;
@@ -13,10 +12,11 @@ import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBo
 import java.io.IOException;
 import java.util.List;
 
+@CrossOrigin(origins="http://localhost:8080")
 @RestController
+@RequestMapping("/api")
 public class WebController {
-    @Autowired
-    private UserProvider userProvider;
+
     @Autowired
     private EventProvider eventProvider;
     @Autowired
@@ -66,11 +66,12 @@ public class WebController {
     public String sendEmail(@PathVariable("eventID") int eventID) {
         return eventProvider.email(eventID);
     }
-
-    @PostMapping("/user")
+/*
+    @PostMapping("/register")
     public String createUser(User u) {
         return userProvider.addUser(u);
     }
+    
 
     @GetMapping("/users")
     public List<User> showAllUsers() {
@@ -86,4 +87,5 @@ public class WebController {
     public String updateUser(User u) {
         return userProvider.updateUser(u);
     }
+    */
 }

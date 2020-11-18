@@ -118,7 +118,7 @@ public class EventProvider {
     }
 
     public ResponseEntity<StreamingResponseBody> getGraph(String email) throws Exception {
-        var dataset = new XYSeriesCollection();
+        XYSeriesCollection dataset = new XYSeriesCollection();
         List<DateTime> dateTimes = new ArrayList<>();
         DateTime today = new DateTime();
         for (int i = 0; i < 7; i++) {
@@ -164,7 +164,7 @@ public class EventProvider {
                 em.close();
             }
         }
-        var series = new XYSeries("Events this Week");
+        XYSeries series = new XYSeries("Events this Week");
         if (eventsList.size() > 0) {
             for (int i = 0; i < week.size(); i++) {
                 series.add(i, eventCounter[i]);

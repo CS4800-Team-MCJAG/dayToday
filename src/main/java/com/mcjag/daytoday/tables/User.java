@@ -1,17 +1,24 @@
 package com.mcjag.daytoday.tables;
-
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.util.Date;
+import javax.persistence.*;
 
 @Entity
 @Table(name="users")
 public class User {
     @Id
+    @Column(name="email")
     private String email;
+
+    @Column(name="firstName")
     private String firstName;
+
+    @Column(name="lastName")
     private String lastName;
+
+    @Column(name="password")
     private String password;
     private Date loginExp;
 
@@ -63,6 +70,11 @@ public class User {
 
     public void setLoginExp(Date loginExp) {
         this.loginExp = loginExp;
+    }
+
+    @Override
+    public String toString(){
+        return "User [email=" + email + ", name= " + firstName + " " + lastName + "]";
     }
 
 }
