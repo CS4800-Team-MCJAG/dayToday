@@ -9,18 +9,30 @@ import java.util.Date;
 public class Event {
     @Id
     @GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
-    private int eventID;
-    private String eventName;
+    private long eventID;
+
+    @Column(name="eventName")
+    private String eventName; 
+
+    @Column(name="startDayAndTime")
     private Date startDayAndTime;
+
+    @Column(name="endDayAndTime")
     private Date endDayAndTime;
+
+    @Column(name="alert")
     private Date alert;
+
+    @Column(name="email")
     private String email;
+
+    @Column(name="zoomLink")
     private String zoomLink;
 
     public Event() {
     }
 
-    public Event(String eventName, Date start, Date end, Date alert, String email, String zoomLink) throws MalformedURLException {
+    public Event(String eventName, Date start, Date end, Date alert, String email, String zoomLink) {
         this.eventName = eventName;
         this.startDayAndTime = start;
         this.endDayAndTime = end;
@@ -29,18 +41,18 @@ public class Event {
         this.zoomLink = zoomLink;
     }
 
-    public int getEventID() {
+    public long getEventID() {
         return eventID;
     }
 
-    public void setEventID(int eventID) {
+    public void setEventID(long eventID) {
         this.eventID = eventID;
     }
 
     public String getEventName() {
         return eventName;
     }
-
+ 
     public void setEventName(String eventName) {
         this.eventName = eventName;
     }

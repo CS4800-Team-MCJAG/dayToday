@@ -32,10 +32,22 @@ export const router = new Router({
                 import ('./views/Profile.vue')
         },
         {
-            path: '/user',
-            name: 'user',
+            path: '/events',
+            name: 'view-events',
             component: () =>
-                import ('./views/BoardUser.vue')
+                import ("./views/ViewEvents.vue")
+        },
+        {
+            path: '/events/:id',
+            name: 'event',
+            component: () =>
+                import ("./views/Event.vue")
+        },
+        {
+            path: "/add",
+            name: "add-event",
+            component: () =>
+                import ("./views/AddEvent.vue")
         }
     ]
 });

@@ -9,7 +9,7 @@ class UserService {
     }
 
     getUserBoard() {
-        return http.get(API_URL + 'user', { headers: authHeader() });
+        return http.get(API_URL + 'events', { headers: authHeader() });
     }
 }
 

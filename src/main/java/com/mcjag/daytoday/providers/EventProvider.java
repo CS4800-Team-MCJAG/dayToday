@@ -29,7 +29,7 @@ import java.util.Properties;
 
 public class EventProvider {
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("dayToday");
-
+/*
     public String addEvent(Event e) {
         EntityManager em = null;
         EntityTransaction tx = null;
@@ -60,6 +60,20 @@ public class EventProvider {
         try {
             em = emf.createEntityManager();
             list = em.createQuery("select e from Event e").getResultList();
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
+        return list;
+    }
+
+    public List<Event> getEventById(int eventID) {
+        EntityManager em = null;
+        List<Event> list = new ArrayList<>();
+        try {
+            em = emf.createEntityManager();
+            list = em.createQuery("select e from Event e where e.eventID = :eid").setParameter("eid", eventID).getResultList();
         } finally {
             if (em != null) {
                 em.close();
@@ -116,7 +130,7 @@ public class EventProvider {
         }
         return "event updated";
     }
-
+*/
     public ResponseEntity<StreamingResponseBody> getGraph(String email) throws Exception {
         XYSeriesCollection dataset = new XYSeriesCollection();
         List<DateTime> dateTimes = new ArrayList<>();
@@ -189,7 +203,7 @@ public class EventProvider {
         return new ResponseEntity<>(streamingResponseBody, HttpStatus.OK);
     }
 
-    public String email(int eventID) {
+    public String email(long eventID) {
         EntityManager em = null;
         final String username = "day2dayapplication@gmail.com";
         final String password = "Day2day!";

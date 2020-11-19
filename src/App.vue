@@ -2,7 +2,7 @@
   <div id="app">
     <nav class="navbar navbar-expand navbar-dark bg-dark">
       <router-link to="/" class="navbar-brand">
-        <img style="max-height:25px;" src="./assets/calendar.jpg"/>dayToday Planner
+        <img style="max-height:25px;" src="./assets/alarm.png"/>dayToday Alert Planner
       </router-link> 
       <div class="navbar-nav mr-auto">
         <li class="nav-item">
@@ -11,7 +11,10 @@
           </router-link>
         </li>
         <li class="nav-item">
-          <router-link v-if="currentUser" to="/user" class="nav-link">User</router-link>
+          <router-link v-if="currentUser" to="/events" class="nav-link">Events</router-link>
+        </li>
+        <li class="nav-item">
+          <router-link v-if="currentUser" to="/add" class="nav-link">Add Events</router-link>
         </li>
       </div>
 

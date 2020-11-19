@@ -17,7 +17,7 @@ class DayToDayApplicationTests {
 
 	@Autowired
 	private WelcomeProvider welcomeProvider;
-/*
+
 	@Test
 	void contextLoads() {
 	}
@@ -32,5 +32,4 @@ class DayToDayApplicationTests {
 		Boolean res = this.welcomeProvider.onThisDay().contains("On this day: ");
 		Assert.assertTrue(res);
 	}
-*/
 }

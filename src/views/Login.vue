@@ -91,10 +91,7 @@
                         },
                         error => {
                             this.loading = false;
-                            this.message =
-                                (error.response && error.response.data) ||
-                                error.message ||
-                                error.toString();
+                            this.message = new String('Bad credentials. Please try again ') || error.message;
                         }
                     );
                 }
