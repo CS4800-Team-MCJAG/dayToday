@@ -11,7 +11,7 @@
 
         <properties>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
-            <property name="javax.persistence.jdbc.url"    value="jdbc:mysql://daytoday-1.cr0gijm51vd3.us-west-1.rds.amazonaws.com:3306/dayToday" />
+            <property name="javax.persistence.jdbc.url"    value="jdbc:mysql://daytoday-1.cr0gijm51vd3.us-west-1.rds.amazonaws.com:3306/dayToday?serverTimezone=PST" />
             <property name="javax.persistence.jdbc.user" value="admin" />
             <property name="javax.persistence.jdbc.password" value="daytoday" />
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>

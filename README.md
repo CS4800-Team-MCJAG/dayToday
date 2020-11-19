@@ -36,15 +36,5 @@ For windows users:
 
 ### app should now be running on http://localhost:8080/
 
-## To set up the database:
-- In the root folder: `mysql -uroot -p < src/main/java/com/mcjag/daytoday/databaseScript.sql`
-
-#### Check the database has been created by 
-
-- `mysql -uroot -p`
-- `show databases;` 
 
 
-## To add entries into the database:
-
-- you will have to change the password in the `src/main/resources/META-INF/persistence.xml` file
