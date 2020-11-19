@@ -22,13 +22,13 @@
                 <label><strong>Event:</strong></label> {{ currentEvent.eventName }}
             </div>
             <div>
-                <label><strong>Start Day and Time:</strong></label> {{ currentEvent.startDayAndTime }}
+                <label><strong>Start Day and Time:</strong></label> {{ currentEvent.startDayAndTime | formatDate }}
             </div>
             <div>
-                <label><strong>End Day and Time:</strong></label> {{ currentEvent.endDayAndTime }}
+                <label><strong>End Day and Time:</strong></label> {{ currentEvent.endDayAndTime | formatDate}}
             </div>
             <div>
-                <label><strong>Notification Time:</strong></label> {{ currentEvent.alert }}
+                <label><strong>Notification Time:</strong></label> {{ currentEvent.alert | formatDate}}
             </div>
             <div>
                 <label><strong>Link:</strong></label> {{ currentEvent.zoomLink }}
@@ -49,6 +49,7 @@
 
 <script>
 import EventService from "../services/events.service";
+import Moment from 'moment';
 
 export default{
     name: 'view-events',
@@ -57,6 +58,7 @@ export default{
             events: [],
             currentEvent: null,
             currentIndex: -1,
+            
             event: {
                 
             }
@@ -79,6 +81,12 @@ export default{
             this.currentIndex = index;
         }
         
+    },
+
+    filters: {
+        formatDate: function(value){
+           return Moment(value).format('MM/DD/YYYY hh:mm a');
+        }
     },
     mounted(){
             this.fetchEvents();
