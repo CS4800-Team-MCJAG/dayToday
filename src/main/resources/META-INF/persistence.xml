@@ -16,7 +16,7 @@
             <property name="javax.persistence.jdbc.password" value="daytoday" />
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
             <property name="hibernate.hbm2ddl.auto" value="update" />
-
+            <property name="maxIdle" value="1"/>
         </properties>
     </persistence-unit>
 </persistence>
