@@ -7,29 +7,20 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import static org.assertj.core.api.Assertions.assertThat;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.junit.runner.RunWith;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
 import java.io.IOException;
 
-
 @SpringBootTest
-class DayToDayApplicationTests {
+@RunWith(SpringJUnit4ClassRunner.class)
 
-	@Autowired
-	private WelcomeProvider welcomeProvider;
+class DayToDayApplicationTests {
 
 	@Test
 	void contextLoads() {
 	}
 
-	@Test
-	void test2() {
-		Assert.assertEquals("Hello World!", this.welcomeProvider.hello("World"));
-	}
-
-	@Test
-	void test() throws IOException {
-		Boolean res = this.welcomeProvider.onThisDay().contains("On this day: ");
-		Assert.assertTrue(res);
-	}
 }

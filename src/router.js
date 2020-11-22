@@ -7,6 +7,7 @@ import Register from './views/Register.vue';
 Vue.use(Router);
 
 export const router = new Router({
+
     routes: [{
             path: '/',
             name: 'home',
@@ -34,17 +35,17 @@ export const router = new Router({
             path: '/events',
             name: 'view-events',
             component: () =>
-                import ("./views/ViewEvents.vue")
+                import ("./views/EventsAll.vue")
         },
         {
             path: '/events/:id',
-            name: 'event',
+            name: 'event-edit',
             component: () =>
-                import ("./views/Event.vue")
+                import ("./views/EventEdit.vue")
         },
         {
-            path: "/add",
-            name: "add-event",
+            path: '/add',
+            name: 'add-event',
             component: () =>
                 import ("./views/AddEvent.vue")
         }
