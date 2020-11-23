@@ -9,7 +9,7 @@
         <div v-if="events && events.length > 0" class="d-flex flex-wrap justify-content-start">
 
             <div v-for="event in events" v-bind:key="event.startDayAndTime" >
-                <div v-if="event.email == $store.state.auth.user.email" class="card mb-2 ml-2 text-dark bg-info" style="width: 18rem;">
+                <div v-if="event.email == $store.state.auth.user.email" class="card mb-2 ml-2 text-dark bg-light" style="width: 18rem;">
                 
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
@@ -17,25 +17,29 @@
                         <span class="regular">{{ event.startDayAndTime | formatDate }}</span>
                     </div>
 
-                    <h6 class="card-subtitle mb-2 text-secondary">
-                         {{ event.zoomLink }}
-                    </h6>
+                    <div class="card-body">
+                        <h6 class="card-subtitle mb-2 text-secondary">
+                            Notification Time: {{ event.alert | formatDate }}
+                        </h6>
+                        <h7 class="card-subtitle mb-2 text-dark"> Event Link: </h7>
+                        <a :href="'http://' + event.zoomLink" target="_blank" class="card-link"> {{ event.zoomLink }} </a>
+
+                    </div>
 
                     <div class="d-flex justify-content-between">
                         <router-link type="button" tag="button" class="card-link btn btn-primary" :to="{ name: 'event-edit', params: {id: event.eventID} }"
                             exact>Edit</router-link>
-                        <a v-on:click.prevent="currentEvent = event.eventID" class="card-link btn btn-danger" href="#" v-b-modal.modal1>Delete</a>
+                        <a v-on:click.prevent="currentEventID = event.eventID" class="card-link btn btn-danger" href="#" v-b-modal.modal1>Delete</a>
                     </div>
                 </div>
                 </div>
-
             </div>
 
             <div>
                 <b-modal id="modal1" ref="modal" centered title="Delete Confirmation">
                     <p class="my-4">Are you sure you would like to delete this event?</p>
                     <div slot="modal-footer" class="w-100 text-right">
-                        <b-btn slot="md" class="mr-1" variant="danger" @click="deleteTask">Delete</b-btn>
+                        <b-btn slot="md" class="mr-1" variant="danger" @click="deleteEvent">Delete</b-btn>
                         <b-btn slot="md" variant="secondary" @click="cancelModal">Cancel</b-btn>
                     </div>
                 </b-modal>
@@ -60,7 +64,7 @@
         data: function() {
             return {
                 events: [],
-                currentEvent: null       
+                currentEventID: null       
             };
         },
         
@@ -76,14 +80,14 @@
             },
             cancelModal: function() {
                 this.$refs.modal.hide();
-                this.currentEvent = null;
+                this.currentEventID = null;
             },
-            deleteTask: async function() {
+            deleteEvent: async function() {
                 this.$refs.modal.hide();
-                await EventService.delete(this.currentEvent.eventID);
-                const index = this.events.findIndex(event => event.eventID === this.currentEvent);
+                await EventService.delete(this.currentEventID);
+                const index = this.events.findIndex(event => event.eventID === this.currentEventID);
                 this.events.splice(index, 1);
-                this.currentEvent = null
+                this.currentEventID = null
             }
         },
         filters: {

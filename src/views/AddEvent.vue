@@ -1,30 +1,31 @@
 <template>
-  <div class="submit-form">
+  <div class="custom-form">
     <div v-if="!submitted">
+      <h3>Add Event</h3>
       <div class="form-group">
           <div class="form-group">
             <label for="eventName">Event Name</label>
-              <input class="form-control" required type="text" id="eventName" placeholder="Event Name" v-model="event.name">
+              <input class="form-control" type="text" id="eventName" placeholder="Event Name" v-model="event.name" required>
           </div>
 
           <div class="form-group">
             <label for="startDayAndTime">Start Day and Time</label>
-                <input type="datetime-local" required class="form-control" id="startDayAndTime" placeholder="Start Date" v-model="event.startDate">
+                <input type="datetime-local" class="form-control" id="startDayAndTime" placeholder="Start Date" v-model="event.startDate" required>
           </div>
 
           <div class="form-group">
             <label for="endDayAndTime">End Day and Time</label>
-            <input type="datetime-local" required class="form-control" id="endDayAndTime" placeholder="End Date" v-model="event.endDate">
+            <input type="datetime-local" class="form-control" id="endDayAndTime" placeholder="End Date" v-model="event.endDate" required>
           </div>
 
           <div class="form-group">
             <label for="alert">Notification Time</label>
-              <input type="datetime-local" required class="form-control" id="alert" placeholder="Notification Time" v-model="event.alert">
+              <input type="datetime-local" class="form-control" id="alert" placeholder="Notification Time" v-model="event.alert" required>
           </div>
 
           <div class="form-group">
             <label for="zoomLink">Link</label>
-              <input class="form-control" type="text" id="zoomLink" required placeholder="Link to event" v-model="event.link">
+              <input class="form-control" type="text" id="zoomLink" placeholder="Link to event" v-model="event.link" required>
           </div>
 
           <button class="btn btn-success" @click="addEvent">Submit</button>
@@ -90,8 +91,11 @@ export default {
 </script>
 
 <style scoped>
-  .submit-form{
-    max-width: 300px;
-    margin:auto;
-  }
+  .custom-form {
+    max-width: 40rem;
+    display: flex;
+    flex-direction: column;
+    margin-left: auto;
+    margin-right: auto;
+}
 </style>
