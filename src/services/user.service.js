@@ -1,15 +1,13 @@
 import http from '../http-commons';
 import authHeader from './auth-header';
 
-const API_URL = 'http://localhost:8080/';
-
 class UserService {
     getPublicContent() {
-        return http.get(API_URL + 'all');
+        return http.get('/all');
     }
 
     getUserBoard() {
-        return http.get(API_URL + 'events', { headers: authHeader() });
+        return http.get('/events', { headers: authHeader() });
     }
 }
 

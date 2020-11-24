@@ -1,11 +1,9 @@
 import http from '../http-commons';
 
-const API_URL = 'http://localhost:8080/';
-
 class AuthService {
     login(user) {
         return http.
-        post(API_URL + 'login', {
+        post('/login', {
                 email: user.email,
                 password: user.password
             })
@@ -22,7 +20,7 @@ class AuthService {
     }
 
     register(user) {
-        return http.post(API_URL + 'register', {
+        return http.post('/register', {
             email: user.email,
             firstName: user.firstName,
             lastName: user.lastName,
