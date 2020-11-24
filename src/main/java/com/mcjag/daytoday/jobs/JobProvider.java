@@ -22,12 +22,14 @@ public class JobProvider {
         try {
             em = emf.createEntityManager();
             List<Event> list = em.createQuery("select e from Event e").getResultList();
+            DateTime date = DateTime.now();
+            date = date.minusMillis(date.getMillisOfSecond());
             for (Event e: list) {
-                DateTime date = new DateTime();
                 DateTime eventAlert = new DateTime(e.getAlert());
                 if (eventAlert.compareTo(date) == 0) {
                     EventProvider eventProvider = new EventProvider();
                     eventProvider.email(e.getEventID());
+                    System.out.println("sent email");
                 }
             }
         } finally {
